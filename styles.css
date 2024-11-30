@@ -1,0 +1,129 @@
+
+body {
+    margin: 0;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background-color: #F3F7FA;
+}
+
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.logo-container h1 {
+    font-size: 20px;
+    font-weight: normal;
+    color: #000000;
+    font-style: italic;
+}
+
+.logo {
+    /* width: 120px; /* Adjust the size as needed */
+    /* margin-bottom: 20px; */ 
+    width: 500px;
+    /* height: 115px; */
+    flex-shrink: 0;
+    margin-top: 2%;
+}
+
+.portal-container {
+    text-align: center;
+    margin: 30px 0;
+    color: #757575;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 80vh; Adjusted to account for logo space */
+    gap: 2rem;
+    padding: 20px;
+    margin-top: 10px 0;
+    margin-bottom: 0.8%;
+}
+
+.card {
+    /* width: 250px; */
+    padding: 20px;
+    background: #ffffff; /* White background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 292px;
+    /* height: 371px; */
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    width: 250px;
+    margin-bottom: 0%;
+}
+
+.card:hover {
+    /* transform: translateY(-2px); */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.088); /* Slightly darker shadow on hover */
+}
+
+.card img {
+    width: 220px;
+    height: 213px;
+    flex-shrink: 0;
+    /* object-fit: cover; */
+    /* border-radius: 50%; */
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background: linear-gradient(311deg, #0A8EF3 -75.83%, #B6F2FF 103.69%);
+}
+
+.login-button {
+    background-color: #0A8EF3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #007bb5;
+    color: #fff;
+    /* transform:scale(1.02); */
+}
+
+.login-text {
+    color: #007bb5; /* Blue text */
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.admin{
+    margin-top: 15px;
+    text-align: center; 
+    margin: auto;
+}
+
+.admin-login-button{
+    background-color: #0a69b1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+.admin-login-button:hover {
+    background-color: #07426e;
+    color: #fff;
+    /* transform:scale(1.02); */
+}
+

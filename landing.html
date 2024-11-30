@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Portal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Plus Jakarta Sans">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>AN ELECTRONIC HEALTH RECORDS SYSTEM FOR<br>
+            DE LA SALLE UNIVERSITY - DASMARIÑAS<h1>
+    </div>
+    <div class="portal-container">
+        <h3>Select a portal.</h3>
+    </div>
+    <div class="container">
+        <div class="card">
+            <img src="student.png" alt="Student">
+            <button class="login-button" onclick="window.location.href='student-login.html'">Proceed</button>
+        </div>
+        
+        <div class="card">
+            <img src="nurse.png" alt="Nurse">
+            <button class="login-button"  onclick="window.location.href='nurse-login.html'">Proceed</button>
+        </div>
+        
+        <div class="card">    
+            <img src="doctor.png" alt="Doctor">
+            <button class="login-button"  onclick="window.location.href='doctor-login.html'">Proceed</button>
+        </div>
+    </div>
+    <div class="admin">
+        <button class="admin-login-button"  onclick="window.location.href='admin-login.html'">ADMIN LOGIN</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            <img src="logo.png" alt="DocuMed Logo">
+        </div>
+        <div class="nav-links">
+            <!-- Notification Icon -->
+            <a href="#" class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 19C4.71667 19 4.47934 18.904 4.288 18.712C4.09667 18.52 4.00067 18.2827 4 18C3.99934 17.7173 4.09534 17.48 4.288 17.288C4.48067 17.096 4.718 17 5 17H6V10C6 8.61667 6.41667 7.38767 7.25 6.313C8.08334 5.23834 9.16667 4.534 10.5 4.2V3.5C10.5 3.08334 10.646 2.72934 10.938 2.438C11.23 2.14667 11.584 2.00067 12 2C12.416 1.99934 12.7703 2.14534 13.063 2.438C13.3557 2.73067 13.5013 3.08467 13.5 3.5V4.2C14.8333 4.53334 15.9167 5.23767 16.75 6.313C17.5833 7.38834 18 8.61734 18 10V17H19C19.2833 17 19.521 17.096 19.713 17.288C19.905 17.48 20.0007 17.7173 20 18C19.9993 18.2827 19.9033 18.5203 19.712 18.713C19.5207 18.9057 19.2833 19.0013 19 19H5ZM12 22C11.45 22 10.9793 21.8043 10.588 21.413C10.1967 21.0217 10.0007 20.5507 10 20H14C14 20.55 13.8043 21.021 13.413 21.413C13.0217 21.805 12.5507 22.0007 12 22Z" fill="#B1B1B1"/>
+                    </svg>
+            </a>
+
+            <!-- User Icon and Profile Name -->
+            <div class="profile-container">
+                <div class="profile">
+                    <div class="user-icon">
+                        <img src="doctor_profile.png" alt="Doctor Profile">
+                    </div>
+                    <div class="profile-name">
+                        <h3>John Doe</h3>
+                        <p>Doctor</p>
+                    </div>
+                </div>
+
+                <!-- Dropdown for Logout -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7L12 13L18 7L20 9L12 17L4 9L6 7Z" fill="black"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="doctor-profile.html" class="dropdown-item">My Profile</a>
+                        <a href="doctor-login.html" class="dropdown-item">Log out</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <nav class="menu" tabindex="0">
+        <div class="smartphone-menu-trigger"></div>
+        <header class="avatar">
+            <img src="doctor_profile.png" />
+            <h2>John D.</h2>
+        </header>
+        <ul>
+            <li tabindex="0" class="icon-dashboard">
+                <img src="home-icon.png" alt="Home Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="doctor-dashboard.html"><span>Home</span></a>
+            </li>
+            <li tabindex="0" class="icon-customers">
+                <img src="records-icon.png" alt="Records Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="doctor-records.html"><span>Records</span></a>
+            </li>
+            <li tabindex="0" class="icon-users">
+                <img src="appointment-icon.png" alt="Appointment Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="doctor-appointment.html"><span>Appointment</span></a>
+            </li>
+            <!-- <li tabindex="0" class="icon-users">
+                <img src="inventory-icon.png" alt="Inventory Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="doctor-inventory.html"><span>Inventory</span></a>
+            </li> -->
+        </ul>
+    </nav>
+
+    <div class="main">
+        <div class="dashboard-content">
+            <div class="banner">
+                <p id="currentDate"></p>
+                <h1>Hello, Dr. John!</h1>
+                <img src="doctor-banner.png" alt="Banner">
+            </div>
+
+            <!-- Add this section for the chart -->
+            <div class="charts-row">
+                <div class="chart-container">
+                    <h2>Monthly Appointments Overview</h2>
+                    <canvas id="appointmentsChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h2>Appointments by Status</h2>
+                    <canvas id="statusPieChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Appointments by Clinic</h2>
+                    <canvas id="clinicPieChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Add this inside the dashboard-content div, after the banner -->
+            <div class="next-appointment-section">
+                <h2>Next Appointment</h2>
+                <div id="nextAppointmentMessage">Loading next appointment...</div>
+                <a href="#" id="viewDetails" style="display: none;">View Details</a>
+            </div>
+        </div>
+        <div class="dashboard-sidebar">
+            <div class="appointment-list">
+                <div class="header-container">
+                    <h2>Appointments</h2>
+                    <a href="doctor-appointment.html" class="view-all-button">View all</a>
+                </div>
+                <div class="calendar-widget">
+                    <h3>Week View</h3>
+                    <div class="week-calendar">
+                        <div class="calendar-header">
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                            <div>Sun</div>
+                        </div>
+                        <div class="calendar-body" id="calendar-body">
+                            <!-- Days will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                <div class="daily-tasks">
+                    <h3>Today's Schedule</h3>
+                    <ul class="task-list" id="task-list">
+                        <!-- Tasks will be populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+                <script>
+                    function getWeekDates(date) {
+                        const curr = date || new Date();
+                        const week = [];
+
+                        // Starting from Monday
+                        curr.setDate(curr.getDate() - curr.getDay() + 1);
+
+                        for (let i = 0; i < 7; i++) {
+                            week.push(new Date(curr));
+                            curr.setDate(curr.getDate() + 1);
+                        }
+
+                        return week;
+                    }
+
+                    function formatDate(date) {
+                        return date.toISOString().split('T')[0];
+                    }
+
+                    async function showAppointments(dateStr) {
+                        const taskList = document.getElementById('task-list');
+                        taskList.innerHTML = '';
+
+                        // Update active state in calendar
+                        document.querySelectorAll('.calendar-day').forEach(day => {
+                            day.classList.remove('active');
+                            if (day.getAttribute('data-date') === dateStr) {
+                                day.classList.add('active');
+                            }
+                        });
+
+                        try {
+                            // Fetch appointments for the selected date from the backend
+                            const response = await fetch(`http://localhost:5000/appointments/date/${dateStr}/1`);
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            const appointments = await response.json();
+
+                            if (appointments.length === 0) {
+                                const li = document.createElement('li');
+                                li.innerHTML = '<span class="task">No appointments scheduled</span>';
+                                taskList.appendChild(li);
+                                return;
+                            }
+
+                            // Sort appointments by time
+                            appointments.sort((a, b) => a.appointment_time.localeCompare(b.appointment_time));
+
+                            appointments.forEach(apt => {
+                                const li = document.createElement('li');
+                                li.innerHTML = `
+                                    <span class="time">${apt.appointment_time}</span>
+                                    <span class="task">${apt.type_of_visit} - ${apt.first_name} ${apt.last_name}</span>
+                                `;
+                                taskList.appendChild(li);
+                            });
+                        } catch (error) {
+                            console.error('Error fetching appointments:', error);
+                            const li = document.createElement('li');
+                            li.innerHTML = '<span class="task">Error loading appointments</span>';
+                            taskList.appendChild(li);
+                        }
+                    }
+
+                    function updateCalendar() {
+                        const calendarBody = document.getElementById('calendar-body');
+                        calendarBody.innerHTML = '';
+
+                        const today = new Date();
+                        const weekDates = getWeekDates(today);
+
+                        weekDates.forEach(date => {
+                            const dayDiv = document.createElement('div');
+                            dayDiv.className = 'calendar-day';
+                            if (date.getDate() === today.getDate() &&
+                                date.getMonth() === today.getMonth() &&
+                                date.getFullYear() === today.getFullYear()) {
+                                dayDiv.classList.add('active');
+                            }
+
+                            dayDiv.textContent = date.getDate();
+                            dayDiv.setAttribute('data-date', formatDate(date));
+
+                            dayDiv.addEventListener('click', () => showAppointments(formatDate(date)));
+
+                            calendarBody.appendChild(dayDiv);
+                        });
+
+                        // Show today's appointments by default
+                        showAppointments(formatDate(today));
+                    }
+
+                    // Initialize calendar when page loads
+                    document.addEventListener('DOMContentLoaded', updateCalendar);
+                </script>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function editRecord(button) {
+            const row = button.parentNode.parentNode;
+            const cells = row.getElementsByTagName('td');
+            const name = cells[0].innerText;
+            const age = cells[1].innerText;
+            const diagnosis = cells[2].innerText;
+            const notes = cells[3].innerText;
+            // Implement edit functionality here
+            alert(`Editing record for ${name}`);
+        }
+
+        function addNote(button) {
+            const row = button.parentNode.parentNode;
+            const cells = row.getElementsByTagName('td');
+            const name = cells[0].innerText;
+            // Implement add note functionality here
+            alert(`Adding note for ${name}`);
+        }
+    </script>
+    <script>
+    // Declare chart variables at the top of your script
+    let appointmentsChart;
+    let statusPieChart;
+    let clinicPieChart;
+
+    // Function to render the appointments bar chart
+    async function renderAppointmentsChart() {
+        try {
+            const response = await fetch('http://localhost:5000/appointments/monthly/1');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            const months = [...new Set(data.map(item => item.month))];
+            const confirmed = months.map(month => {
+                const item = data.find(d => d.month === month && d.status === 'Confirmed');
+                return item ? item.appointment_count : 0;
+            });
+            const pending = months.map(month => {
+                const item = data.find(d => d.month === month && d.status === 'Pending');
+                return item ? item.appointment_count : 0;
+            });
+
+            const ctx = document.getElementById('appointmentsChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (appointmentsChart) {
+                appointmentsChart.destroy();
+            }
+
+            appointmentsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [
+                        {
+                            label: 'Confirmed',
+                            data: confirmed,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            barPercentage: 0.8,
+                            categoryPercentage: 0.9
+                        },
+                        {
+                            label: 'Pending',
+                            data: pending,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            barPercentage: 0.8,
+                            categoryPercentage: 0.9
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Appointments'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Monthly Appointments Overview'
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading appointments chart:', error);
+            const container = document.querySelector('.chart-container');
+            container.innerHTML = `<p class="error-message">Error loading chart: ${error.message}</p>`;
+        }
+    }
+
+    // Function to render the status pie chart
+    async function renderStatusPieChart() {
+        try {
+            const response = await fetch('http://localhost:5000/appointments/status/1');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            const statuses = data.map(item => item.status);
+            const counts = data.map(item => item.appointment_count);
+
+            const ctx = document.getElementById('statusPieChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (statusPieChart) {
+                statusPieChart.destroy();
+            }
+
+            statusPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: statuses,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.8)',  // Blue for Confirmed
+                            'rgba(255, 99, 132, 0.8)',  // Red for Pending
+                            'rgba(255, 206, 86, 0.8)'   // Yellow for Rejected
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribution of Appointments by Status'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading status pie chart:', error);
+            const container = document.querySelector('.chart-container');
+            container.innerHTML = `<p class="error-message">Error loading chart: ${error.message}</p>`;
+        }
+    }
+
+    // Function to render the clinic pie chart
+    async function renderClinicPieChart() {
+        try {
+            const response = await fetch('http://localhost:5000/appointments/clinic/1');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            if (data.message) {
+                // If no appointments found
+                document.getElementById('clinicPieChart').parentElement.innerHTML = 
+                    `<p class="error-message">${data.message}</p>`;
+                return;
+            }
+
+            const clinics = data.map(item => item.clinic);
+            const counts = data.map(item => item.appointment_count);
+
+            const ctx = document.getElementById('clinicPieChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (clinicPieChart) {
+                clinicPieChart.destroy();
+            }
+
+            clinicPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: clinics,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                        'rgba(54, 162, 235, 0.8)',  // Blue for Confirmed
+                        'rgba(255, 99, 132, 0.8)',  // Red for Pending
+                        ],
+                        borderColor: [
+                        'rgba(54, 162, 235, 0.8)',  // Blue for Confirmed
+                        'rgba(255, 99, 132, 0.8)',  // Red for Pending
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribution of Appointments by Clinic',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} appointments (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading clinic pie chart:', error);
+            const container = document.getElementById('clinicPieChart').parentElement;
+            container.innerHTML = `<p class="error-message">Error loading chart: ${error.message}</p>`;
+        }
+    }
+
+    // Add this function to fetch and display the next appointment
+    async function fetchNextAppointment() {
+        try {
+            const response = await fetch('http://localhost:5000/appointments/next/1');
+            const data = await response.json();
+
+            const nextAppointmentDiv = document.getElementById('nextAppointment');
+            if (data.message) {
+                // If no upcoming appointments, display a message
+                nextAppointmentDiv.textContent = data.message;
+            } else {
+                // Display the next appointment details
+                nextAppointmentDiv.textContent = `Your next appointment is on ${data.appointment_date} at ${data.appointment_time}, which is ${data.days_until} days away. Patient: ${data.patient_name}, Type of Visit: ${data.type_of_visit}, Status: ${data.status}`;
+            }
+        } catch (error) {
+            console.error('Error fetching next appointment:', error);
+            document.getElementById('nextAppointment').textContent = 'Error loading next appointment. Please try again later.';
+        }
+    }
+
+    // Update the DOMContentLoaded event listener to include both charts
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAppointmentsChart();
+        renderStatusPieChart();
+        renderClinicPieChart();
+        fetchNextAppointment();
+    });
+    </script>
+    <script>
+    async function fetchNextAppointment() {
+        try {
+            const response = await fetch('http://localhost:5000/appointments/next/1');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            const nextAppointmentMessage = document.getElementById('nextAppointmentMessage');
+            const viewDetailsLink = document.getElementById('viewDetails');
+
+            if (data.message) {
+                // If no upcoming appointment
+                nextAppointmentMessage.textContent = data.message;
+                viewDetailsLink.style.display = 'none';
+            } else {
+                // Display the next appointment details
+                nextAppointmentMessage.textContent = `Your next appointment is on ${data.appointment_date} at ${data.appointment_time}, which is ${data.days_until} days away.`;
+                
+                // Make the "view" link visible
+                viewDetailsLink.style.display = 'inline';
+                
+                // When "view" is clicked, show detailed information
+                viewDetailsLink.onclick = function(e) {
+                    e.preventDefault();
+                    alert(`Patient: ${data.patient_name}\nType of Visit: ${data.type_of_visit}\nStatus: ${data.status}\nDate: ${data.appointment_date}\nTime: ${data.appointment_time}`);
+                };
+            }
+        } catch (error) {
+            console.error('Error fetching next appointment:', error);
+            document.getElementById('nextAppointmentMessage').textContent = 'Error loading next appointment. Please try again later.';
+        }
+    }
+
+    // Update the DOMContentLoaded event listener to include fetching the next appointment
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAppointmentsChart();
+        renderStatusPieChart();
+        renderClinicPieChart();
+        fetchNextAppointment();
+    });
+    </script>
+    <script>
+        // Add this script to update the date dynamically
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentDateElement = document.getElementById('currentDate');
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            currentDateElement.textContent = today.toLocaleDateString(undefined, options);
+        });
+    </script>
+</body>
+</html>

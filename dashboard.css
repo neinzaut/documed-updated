@@ -1002,3 +1002,43 @@ h3 {
     align-items: center;
     justify-content: center;
 }
+
+.action-buttons .view-btn,
+.action-buttons .download-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-btn {
+    background-color: #0A8EF3;
+    color: white;
+}
+
+.download-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #0056b3;
+}
+
+.download-btn:hover {
+    background-color: #218838;
+}
+
+/* Style for the record details cell */
+td strong {
+    color: #0A8EF3;
+    font-size: 0.9em;
+}
+
+td small {
+    color: #6c757d;
+    font-size: 0.8em;
+}

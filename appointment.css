@@ -1,0 +1,1163 @@
+body {
+    background: #F3F7FA;
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #fff;
+    padding-left: 240px;
+}
+
+main {
+    position: relative;
+    height: 100vh;
+}
+
+/* NAVIGATION BAR */
+.navbar {
+    background-color: #ffffff;
+    /* padding: 15px 30px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    /* width: calc(100% - 240px); Account for sidebar width */
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    height: 70px;
+    /* flex-shrink: 0; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
+}
+
+.nav-logo img {
+    height: 32px; /* 60% of navbar's 80px height */
+    margin: auto 0; /* Vertically middle align */
+    /* margin-left: 35%; */
+    padding: 15px 30px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    padding: 0 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #cce5ff;
+}
+
+/* NAVBAR - NOTIFICATION ICON */
+.nav-icon {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+}   
+
+/* NAVBAR - NAME AND PROFILE ICON */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-icon {
+    display: flex;
+    align-items: center;
+}
+.user-icon img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-name h3 {
+    margin: 0;
+    font-size: 16px;
+    color: black;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.profile-name p {
+    margin: 0;
+    font-size: 12px;
+    color: #757575;
+    font-weight: lighter;
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: #e0e0e0;
+    color: #0056b3;
+}
+
+.dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 60px;
+    right: 20px;
+    min-width: 200px;
+    border-radius: 8px;
+    transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Add padding to create hoverable area between dropdown toggle and menu */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+}
+
+.dropdown-item {
+    color: black;
+    padding: 16px 24px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.helper {
+    background: rgba(0, 0, 0, 0.2);
+    color: #007bff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    padding: 1.2em 2em;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.helper span {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 0.4em;
+    display: block;
+}
+
+/* SIDEBAR - MENU */
+.menu {
+    background: #0A8EF3;
+    height: 100vh;
+    width: 240px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    outline: none;
+    margin-top: 70px; /* Account for navbar height */
+    height: calc(100vh - 70px); /* Subtract navbar height from viewport height */
+}
+
+.menu .avatar {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2em 0.5em;
+    text-align: center;
+}
+.menu .avatar img {
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #007bff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.menu .avatar h2 {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0.5em 0;
+    margin: 0;
+}
+
+.menu ul li a {
+    color: white; /* Change text color to white */
+    text-decoration: none; /* Optional: remove underline */
+}
+
+.menu ul li {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 1em 0.5em 3em;
+    font-size: 0.95em;
+    font-weight: regular;
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    background-size: auto 20px;
+    transition: all 0.15s linear;
+    cursor: pointer;
+}
+
+.menu ul li.icon-dashboard {
+    background-image: url("http://www.entypo.com/images/gauge.svg");
+}
+
+.menu ul li.icon-customers {
+    background-image: url("http://www.entypo.com/images/briefcase.svg");
+}
+
+.menu ul li.icon-users {
+    background-image: url("http://www.entypo.com/images/users.svg");
+}
+
+.menu ul li.icon-settings {
+    background-image: url("http://www.entypo.com/images/tools.svg");
+}
+
+.menu ul li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu ul li:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 900px) and (min-width: 400px) {
+    body {
+        padding-left: 90px;
+    }
+    .menu {
+        width: 90px;
+    }
+    .menu .avatar {
+        padding: 0.5em;
+        position: relative;
+    }
+    .menu .avatar img {
+        width: 60px;
+    }
+    .menu .avatar h2 {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 100px;
+        margin: 0;
+        min-width: 200px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.4);
+        transform: translate3d(-20px, -50%, 0);
+        transition: all 0.15s ease-in-out;
+    }
+    .menu .avatar:hover h2 {
+        opacity: 1;
+        transform: translate3d(0px, -50%, 0);
+    }
+    .menu ul li {
+        height: 60px;
+        background-position: center center;
+        background-size: 30px auto;
+        position: relative;
+    }
+    .menu ul li span {
+        opacity: 0;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        top: 50%;
+        left: 80px;
+        transform: translate3d(-15px, -50%, 0);
+        transition: all 0.15s ease-in-out;
+    }
+    .menu ul li span:before {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 50%;
+        left: -5px;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-right: 5px solid rgba(0, 0, 0, 0.5);
+        transform: translateY(-50%);
+    }
+    .menu ul li:hover span {
+        opacity: 1;
+        transform: translate3d(0px, -50%, 0);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    body {
+        padding-left: 0;
+    }
+    .menu {
+        width: 230px;
+        box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
+        transform: translate3d(-230px, 0, 0);
+        transition: all 0.3s ease-in-out;
+    }
+    .menu .smartphone-menu-trigger {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 100%;
+        background: #0056b3;
+    }
+    .menu .smartphone-menu-trigger:before,
+    .menu .smartphone-menu-trigger:after {
+        content: '';
+        width: 50%;
+        height: 2px;
+        background: #fff;
+        border-radius: 10px;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+    }
+    .menu .smartphone-menu-trigger:after {
+        top: 55%;
+        transform: translate3d(-50%, -50%, 0);
+    }
+    .menu ul li {
+        padding: 1em 1em 1em 3em;
+        font-size: 1.2em;
+    }
+    .menu:focus {
+        transform: translate3d(0, 0, 0);
+        box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
+    }
+    .menu:focus .smartphone-menu-trigger {
+        pointer-events: none;
+    }
+}
+
+  /* MAIN */
+.main-container {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+    color: #333;
+    margin-top: 5%;
+}
+.main-container h1 {
+    margin-left: 1%;
+}
+
+.appointment-container {
+    padding: 15px;
+}
+
+.top-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.calendar-section {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 20px;
+}
+
+.calendar-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.calendar-header button:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-cell {
+    aspect-ratio: 1;
+    position: relative;
+}
+
+.cell-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.available .cell-content {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.available .cell-content:hover {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+}
+
+.unavailable .cell-content {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.availability-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 500;
+    color: #666;
+}
+
+.time-slot-selector {
+    margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.time-slot {
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-slot:hover {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+}
+
+.time-slot.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.time-slot.unavailable {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.request-list{
+    display: inline;
+}
+.requests-section {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Rest of the styles remain the same */
+.request-card {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.request-info-container {
+    display: grid;
+    align-items: center;
+}
+
+.request-info-container, .request-actions {
+    display: flex;
+    align-items: center; 
+    margin-right: 10px; 
+}
+
+.request-info-container .icon, .request-info {
+    margin-right: 5px; 
+}
+
+.request-info {
+    margin-top: 10px;
+}
+.request-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.accept-btn, .reject-btn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.accept-btn {
+    background: #28a745;
+    color: white;
+}
+
+.reject-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* margin-top: auto; */
+}
+
+.appointments-table h2{
+    margin-bottom: 20px;
+}
+
+.appointments-table th,
+.appointments-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+    
+}
+
+.appointments-table th {
+    background-color: #0056b3;
+    color: rgb(255, 255, 255);
+}
+
+.status-confirmed, .status-pending {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.edit-btn, .cancel-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.edit-btn {
+    background: #0056b3;
+    color: white;
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.request-card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.request-info, .request-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.request-name {
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger font size for emphasis */
+    color: #333; /* Darker color for emphasis */
+}
+
+.request-reason {
+    font-weight: bold;
+}
+
+.request-time, .request-date {
+    color: #555;
+}
+
+.request-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Space between buttons */
+}
+
+
+.accept-btn, .reject-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.accept-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #45a049;
+}
+
+.reject-btn:hover {
+    background-color: #e53935;
+}
+
+/* Add styles for the modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Ensure this is higher than the sidebar */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 9% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content h2 {
+    color: #333;  /* or any dark color you prefer */
+    margin-bottom: 20px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.user-icon-large {
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+#view-more-btn {
+    width: 60.75;
+    height: 26px;
+    font-size: 13.33px;
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    margin-left: auto; /* Pushes the button to the right */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 325px;
+    padding: 5px 10px;
+
+}
+
+#view-more-btn:hover {
+    background-color: #0056b3;
+}
+
+.user-icon-large {
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+
+.request-info-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 8px;
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-right: 15px; /* Adjust spacing between icon and info */
+}
+
+.request-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.request-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.request-wrapper {
+    display: grid;
+    grid-template-columns: 250px minmax(300px, 1fr) auto;
+    gap: 20px;
+    align-items: center;
+}
+
+.request-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Push to the right */
+    margin-right: 25px; /* Space from the Accept button */
+    gap: 3px;
+}
+.request-reason {
+    font-weight: lighter;
+    font-style: normal;
+    color: #555;
+    
+}
+
+.request-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Specific styles for patient requests in the modal */
+.modal .request-details{
+    margin-top: -50px;
+    margin-left: 1055px; 
+}
+
+/* Add this after the existing calendar styles */
+.calendar-event {
+    background-color: #4CAF50; /* Green for confirmed */
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    margin-top: 2px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+
+/* Add styles for appointment indicators */
+.has-appointment {
+    background-color: #e3f2fd;
+    position: relative;
+}
+
+.has-appointment::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: #0A8EF3;
+    border-radius: 50%;
+}
+
+.request-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.request-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.confirm-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.status-confirmed {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #FFA000;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: #f44336;
+    font-weight: bold;
+}
+
+/* Add spinner animation */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0A8EF3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+.loading-spinner span {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Update table styles */
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.appointments-table th,
+.appointments-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.appointments-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.appointments-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.status-confirmed {
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.status-pending {
+    color: #FFA000;
+    font-weight: 600;
+}
+
+.status-rejected {
+    color: #f44336;
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn, .cancel-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.edit-btn {
+    background-color: #0A8EF3;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Add these new styles */
+.loading-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.error-message {
+    text-align: center;
+    padding: 20px;
+    color: #f44336;
+}
+
+.no-requests {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Update table header */
+.appointments-table thead tr {
+    background-color: #f8f9fa;
+}
+
+.appointments-table th {
+    padding: 12px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Request card styles */
+.request-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.request-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.request-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.request-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.patient-info {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.patient-info h3 {
+    color: #0A8EF3;
+    margin: 0 0 5px 0;
+}
+
+.student-id, .contact {
+    color: #666;
+    font-size: 0.9em;
+    margin: 2px 0;
+}
+
+.appointment-info {
+    margin: 10px 0;
+}
+
+.appointment-info p {
+    margin: 5px 0;
+}
+
+.request-time {
+    color: #888;
+    font-size: 0.8em;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.request-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.request-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.request-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}

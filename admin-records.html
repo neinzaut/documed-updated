@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" type="image/x-icon" href="logo_notext.png">
+</head>
+<body>
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            <img src="logo.png" alt="DocuMed Logo">
+        </div>
+        <div class="nav-links">
+            <!-- Notification Icon -->
+            <a href="#" class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 19C4.71667 19 4.47934 18.904 4.288 18.712C4.09667 18.52 4.00067 18.2827 4 18C3.99934 17.7173 4.09534 17.48 4.288 17.288C4.48067 17.096 4.718 17 5 17H6V10C6 8.61667 6.41667 7.38767 7.25 6.313C8.08334 5.23834 9.16667 4.534 10.5 4.2V3.5C10.5 3.08334 10.646 2.72934 10.938 2.438C11.23 2.14667 11.584 2.00067 12 2C12.416 1.99934 12.7703 2.14534 13.063 2.438C13.3557 2.73067 13.5013 3.08467 13.5 3.5V4.2C14.8333 4.53334 15.9167 5.23767 16.75 6.313C17.5833 7.38834 18 8.61734 18 10V17H19C19.2833 17 19.521 17.096 19.713 17.288C19.905 17.48 20.0007 17.7173 20 18C19.9993 18.2827 19.9033 18.5203 19.712 18.713C19.5207 18.9057 19.2833 19.0013 19 19H5ZM12 22C11.45 22 10.9793 21.8043 10.588 21.413C10.1967 21.0217 10.0007 20.5507 10 20H14C14 20.55 13.8043 21.021 13.413 21.413C13.0217 21.805 12.5507 22.0007 12 22Z" fill="#B1B1B1"/>
+                    </svg>
+            </a>
+
+            <!-- User Icon and Profile Name -->
+            <div class="profile-container">
+                <div class="profile">
+                    <div class="user-icon">
+                        <img src="admin_profile.png" alt="Admin Profile">
+                    </div>
+                    <div class="profile-name">
+                        <h3>Juan Dela Cruz</h3>
+                        <p>Admin</p>
+                    </div>
+                </div>
+
+                <!-- Dropdown for Logout -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7L12 13L18 7L20 9L12 17L4 9L6 7Z" fill="black"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="admin-profile.html" class="dropdown-item">My Profile</a>
+                        <a href="admin-login.html" class="dropdown-item">Log out</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <nav class="menu" tabindex="0">
+        <div class="smartphone-menu-trigger"></div>
+        <header class="avatar">
+            <img src="admin_profile.png" alt="Admin Profile" />
+            <h2>Juan Dela Cruz</h2>
+        </header>
+        <ul>
+            <li tabindex="0" class="icon-dashboard">
+                <img src="home-icon.png" alt="Home Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="admin-dashboard.html"><span>Home</span></a>
+            </li>
+            <li tabindex="0" class="icon-customers">
+                <img src="records-icon.png" alt="Records Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="admin-records.html"><span>Records</span></a>
+            </li>
+            <li tabindex="0" class="icon-users">
+                <img src="appointment-icon.png" alt="Appointment Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="admin-appointment.html"><span>Appointment</span></a>
+            </li>
+            <li tabindex="0" class="icon-users">
+                <img src="inventory-icon.png" alt="Inventory Icon" style="width:20px; height:20px; margin-right:10px;">
+                <a href="admin-inventory.html"><span>Inventory</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <div class="content">
+            <h1>Patient Records</h1>
+            <!-- Add loading and error message containers -->
+            <div id="loadingMessage" class="message loading" style="display: none;">
+                <div class="spinner"></div>
+                Loading patient records...
+            </div>
+            <div id="errorMessage" class="message error" style="display: none;">
+                Failed to load patient records. Please try again later.
+            </div>
+            <!-- Add button, search bar, and filter button -->
+            <div class="controls">
+                <div class="search-container">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchBar" placeholder="Search by ID, name, course, age...">
+                    <select id="searchType" class="search-type">
+                        <option value="all">All Fields</option>
+                        <option value="student_id">Student ID</option>
+                        <option value="name">Name</option>
+                        <option value="contact">Contact</option>
+                        <option value="course">Course</option>
+                        <option value="age">Age</option>
+                        <option value="gender">Gender</option>
+                    </select>
+                </div>
+                <div class="filter-container">
+                    <button class="btn btn-secondary" onclick="toggleFilterDropdown()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                        Filter
+                    </button>
+                    <div class="filter-dropdown" id="filterDropdown">
+                        <div class="filter-group">
+                            <label>Course:</label>
+                            <select id="courseFilter">
+                                <option value="">All Courses</option>
+                                <option value="BSCS">BSCS</option>
+                                <option value="BSIT">BSIT</option>
+                                <option value="BSED">BSED</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Gender:</label>
+                            <select id="genderFilter">
+                                <option value="">All</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Age Range:</label>
+                            <div class="age-range">
+                                <input type="number" id="ageMin" placeholder="Min">
+                                <span>-</span>
+                                <input type="number" id="ageMax" placeholder="Max">
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-primary" onclick="applyFilters()">Apply</button>
+                            <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="patientTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Record Details</th>
+                        <th>Date Posted</th>
+                        <th>Clinic</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add CSS for loading and error states -->
+    <style>
+        .message {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .loading {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1976d2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #6c757d;
+        }
+
+        #searchBar {
+            flex-grow: 1;
+            padding: 10px 10px 10px 40px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-type {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .filter-container {
+            position: relative;
+        }
+
+        .filter-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 250px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .age-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .age-range input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .add-patient {
+            white-space: nowrap;
+        }
+    </style>
+
+    <script>
+        // Fetch patient records from the backend API
+        async function fetchPatients() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const patientTable = document.getElementById('patientTable');
+
+            try {
+                // Show loading message and hide other elements
+                loadingMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                patientTable.style.display = 'none';
+
+                const response = await fetch('http://127.0.0.1:5000/patients');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const patients = await response.json();
+
+                // Populate the table
+                const tableBody = document.querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear any existing rows
+
+                patients.forEach(patient => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${patient.date}</td>
+                        <td>${patient.student_id}</td>
+                        <td>${patient.first_name} ${patient.last_name}</td>
+                        <td>${patient.course} - ${patient.year}</td>
+                        <td>${patient.chief_complaint}</td>
+                        <td>${patient.diagnosis}</td>
+                        <td>${patient.treatment}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button onclick="editRecord('${patient.student_id}')" class="edit-btn">Edit</button>
+                                <button onclick="addNote('${patient.student_id}')" class="note-btn">Add Note</button>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Hide loading message and show table
+                loadingMessage.style.display = 'none';
+                patientTable.style.display = 'table';
+
+            } catch (error) {
+                console.error('Error fetching patients:', error);
+                // Show error message and hide other elements
+                loadingMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+                patientTable.style.display = 'none';
+
+                // Add retry button to error message
+                errorMessage.innerHTML = `
+                    Failed to load patient records.
+                    <button onclick="fetchPatients()" class="retry-button">Retry</button>
+                `;
+            }
+        }
+
+        // Fetch patients when the page loads
+        window.onload = fetchPatients;
+
+        // Functions for edit and add note
+        function editRecord(studentId) {
+            alert(`Edit functionality for Student ID: ${studentId}`);
+        }
+
+        function addNote(studentId) {
+            alert(`Add Note functionality for Student ID: ${studentId}`);
+        }
+
+        // Function to add a new patient
+        function addPatient() {
+            alert('Add Patient functionality');
+        }
+
+        function toggleFilterDropdown() {
+            const dropdown = document.getElementById('filterDropdown');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function applyFilters() {
+            const course = document.getElementById('courseFilter').value;
+            const gender = document.getElementById('genderFilter').value;
+            const ageMin = document.getElementById('ageMin').value;
+            const ageMax = document.getElementById('ageMax').value;
+
+            try {
+                let url = 'http://127.0.0.1:5000/patients?';
+                if (course) url += `course=${encodeURIComponent(course)}&`;
+                if (gender) url += `gender=${encodeURIComponent(gender)}&`;
+                if (ageMin) url += `age_min=${encodeURIComponent(ageMin)}&`;
+                if (ageMax) url += `age_max=${encodeURIComponent(ageMax)}&`;
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const patients = await response.json();
+                updateTable(patients);
+                toggleFilterDropdown();
+            } catch (error) {
+                console.error('Error applying filters:', error);
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('courseFilter').value = '';
+            document.getElementById('genderFilter').value = '';
+            document.getElementById('ageMin').value = '';
+            document.getElementById('ageMax').value = '';
+            fetchPatients();
+            toggleFilterDropdown();
+        }
+
+        // Add this function for binary search
+        function binarySearch(arr, searchKey, field) {
+            let left = 0;
+            let right = arr.length - 1;
+            const results = [];
+
+            // Convert search key to lowercase for case-insensitive comparison
+            searchKey = searchKey.toLowerCase();
+
+            while (left <= right) {
+                const mid = Math.floor((left + right) / 2);
+                const midValue = String(arr[mid][field]).toLowerCase();
+
+                // Check if the middle value contains the search key
+                if (midValue.includes(searchKey)) {
+                    // Found a match, collect all matching records around this point
+                    results.push(arr[mid]);
+
+                    // Check left side for more matches
+                    let leftPtr = mid - 1;
+                    while (leftPtr >= 0 && String(arr[leftPtr][field]).toLowerCase().includes(searchKey)) {
+                        results.push(arr[leftPtr]);
+                        leftPtr--;
+                    }
+
+                    // Check right side for more matches
+                    let rightPtr = mid + 1;
+                    while (rightPtr < arr.length && String(arr[rightPtr][field]).toLowerCase().includes(searchKey)) {
+                        results.push(arr[rightPtr]);
+                        rightPtr++;
+                    }
+
+                    break;
+                }
+
+                // Decide which half to search
+                if (midValue < searchKey) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            return results;
+        }
+
+        // Modified search function
+        async function filterTable() {
+            const searchType = document.getElementById('searchType').value;
+            const searchText = document.getElementById('searchBar').value.toLowerCase();
+
+            if (!searchText) {
+                fetchPatients();
+                return;
+            }
+
+            try {
+                // Get all patients first
+                const response = await fetch('http://127.0.0.1:5000/patients');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                let patients = await response.json();
+                let results = [];
+
+                // Sort the array based on search type
+                if (searchType === 'all') {
+                    // Search in all fields
+                    const searchFields = ['student_id', 'first_name', 'last_name', 'contact_number', 'age', 'gender', 'course'];
+                    searchFields.forEach(field => {
+                        // Sort by current field
+                        const sortedPatients = [...patients].sort((a, b) => 
+                            String(a[field]).toLowerCase().localeCompare(String(b[field]).toLowerCase())
+                        );
+                        // Search in current field
+                        const fieldResults = binarySearch(sortedPatients, searchText, field);
+                        results = [...results, ...fieldResults];
+                    });
+                    // Remove duplicates
+                    results = Array.from(new Set(results.map(JSON.stringify))).map(JSON.parse);
+                } else {
+                    // Sort by specific field
+                    patients.sort((a, b) => 
+                        String(a[searchType]).toLowerCase().localeCompare(String(b[searchType]).toLowerCase())
+                    );
+                    results = binarySearch(patients, searchText, searchType);
+                }
+
+                updateTable(results);
+
+            } catch (error) {
+                console.error('Error searching:', error);
+            }
+        }
+
+        // Add event listener for search input
+        document.getElementById('searchBar').addEventListener('input', debounce(filterTable, 300));
+
+        // Debounce function to prevent too many API calls
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function updateTable(patients) {
+            const tableBody = document.querySelector('tbody');
+            tableBody.innerHTML = '';
+
+            patients.forEach(patient => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${patient.date}</td>
+                    <td>${patient.student_id}</td>
+                    <td>${patient.first_name} ${patient.last_name}</td>
+                    <td>${patient.course} - ${patient.year}</td>
+                    <td>${patient.chief_complaint}</td>
+                    <td>${patient.diagnosis}</td>
+                    <td>${patient.treatment}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button onclick="editRecord('${patient.student_id}')" class="edit-btn">Edit</button>
+                            <button onclick="addNote('${patient.student_id}')" class="note-btn">Add Note</button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Close filter dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const filterContainer = document.querySelector('.filter-container');
+            const filterDropdown = document.getElementById('filterDropdown');
+            
+            if (!filterContainer.contains(event.target) && filterDropdown.style.display === 'block') {
+                filterDropdown.style.display = 'none';
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
